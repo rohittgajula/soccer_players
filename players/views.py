@@ -12,6 +12,12 @@ from django.core.cache import cache
 
 import hashlib
 
+from django.http import JsonResponse
+
+def player_ids(request):
+    player_ids = Player.objects.values_list('id', flat=True)
+    return JsonResponse(list(player_ids), safe=False)
+
 
 @api_view(['GET'])
 def player_list(request):
